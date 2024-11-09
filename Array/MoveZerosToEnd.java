@@ -1,10 +1,10 @@
-package Sorting;
+package Array;
 
-// Problem 6: Sort the elements of an array using Quick sort
+// Problem 8: Move all the zeros to the end of the array
 
 import java.util.Scanner;
 
-public class QuickSort {
+public class MoveZerosToEnd {
 
     public static void swap(int[] arr, int a, int b) {
         int temp = arr[a];
@@ -12,30 +12,29 @@ public class QuickSort {
         arr[b] = temp;
     }
 
-    public static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = low - 1;
-
-        for (int j = low; j <= high - 1; j++) {
-            if (arr[j] < pivot) {
-                i++;
-                swap(arr, i, j);
+    public static void moveZeros(int[] nums) {
+        int i = -1;
+        // finding the index of first zero element
+        for (int j = 0; j < nums.length; j++) {
+            if(nums[j] == 0) {
+                i = j;
+                break;
             }
         }
 
-        i++;
-        swap(arr, high, i);
-        return i;
-    }
-
-    public static void quickSort(int[] arr, int start, int end) {
-        if (start < end) {
-            int partitionIndex = partition(arr, start, end);
-            quickSort(arr, start, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, end);
+        // if there is no non-zero element
+        if(i == -1) {
+            return;
+        }
+        
+        for (int k = i+1; k < nums.length; k++) {
+            if(nums[k] != 0) {
+                swap(nums, i, k);
+                i++;
+            }
         }
     }
-
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -54,13 +53,14 @@ public class QuickSort {
             }
         }
 
-        quickSort(arr, 0, arr_size - 1);
+        moveZeros(arr);
 
-        System.out.println("The sorted array is: ");
+        System.out.println("The resultant array is: ");
         for (int i = 0; i < arr_size; i++) {
             System.out.print(arr[i] + " ");
         }
 
         sc.close();
     }
+
 }
