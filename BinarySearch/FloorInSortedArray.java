@@ -2,25 +2,26 @@ package BinarySearch;
 
 import java.util.Scanner;
 
-// Problem 4: Write a program to return the smallest index of an element greater than the given target
+// Problem 6: Find the index of the floor value of a given element from a sorted array of elements.
 
-public class UpperBound {
-    public static int lowerBound(int[] arr, int target) {
+public class FloorInSortedArray {
+    public static int findFloor(int[] arr, int target) {
         int low = 0;
         int high = arr.length - 1;
-        int result = arr.length;
-        while (low <= high) {
+        int result = -1;
+        while(low <= high) {
             int mid = low + (high - low)/2;
-            if(arr[mid] > target) {
-                high = mid - 1; // to search if a smaller index may be present
+            if(arr[mid] <= target) {
                 result = mid;
-            }
-            else {
                 low = mid + 1;
+            }
+            else{
+                high = mid - 1;
             }
         }
         return result;
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -39,10 +40,10 @@ public class UpperBound {
             }
         }
 
-        System.out.println("Enter the upper bound of the element to be found: ");
+        System.out.println("Enter target element: ");
         int k = sc.nextInt();
 
-        System.out.println("The upper bound index is: " + lowerBound(arr, k));
+        System.out.println("Index of the floor value of given element is: " + findFloor(arr, k));
 
         sc.close();
     }

@@ -2,18 +2,18 @@ package BinarySearch;
 
 import java.util.Scanner;
 
-// Problem 4: Write a program to return the smallest index of an element greater than the given target
+// Problem 7: Find the index of the ceiling value of a given element from a sorted array of elements.
 
-public class UpperBound {
-    public static int lowerBound(int[] arr, int target) {
+public class CeilingInSortedArray {
+    public static int findCeil(int[] arr, int target) {
         int low = 0;
         int high = arr.length - 1;
-        int result = arr.length;
+        int result = -1;
         while (low <= high) {
             int mid = low + (high - low)/2;
-            if(arr[mid] > target) {
-                high = mid - 1; // to search if a smaller index may be present
+            if(arr[mid] >= target) {
                 result = mid;
+                high = mid - 1;
             }
             else {
                 low = mid + 1;
@@ -21,6 +21,7 @@ public class UpperBound {
         }
         return result;
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -39,10 +40,10 @@ public class UpperBound {
             }
         }
 
-        System.out.println("Enter the upper bound of the element to be found: ");
+        System.out.println("Enter target element: ");
         int k = sc.nextInt();
 
-        System.out.println("The upper bound index is: " + lowerBound(arr, k));
+        System.out.println("Index of the Ceiling value of given element is: " + findCeil(arr, k));
 
         sc.close();
     }
